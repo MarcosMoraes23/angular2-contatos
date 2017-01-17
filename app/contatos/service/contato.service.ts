@@ -7,10 +7,10 @@ import 'rxjs/add/operator/toPromise';
 
 import { CONTATOS } from './../mock/contatos-mock';
 import { Contato } from './../model/contato.model';
-
+import { ServiceInterface } from './../../interfaces/service.interface';
 
 @Injectable()
-export class ContatoService{
+export class ContatoService implements ServiceInterface<Contato>{
 
     private contatosUrl: string = 'app/contatos';
     private headers: Headers = new Headers({'Content-Type': 'application/json'})
@@ -46,7 +46,7 @@ export class ContatoService{
     }
 
 
-    getContatos(): Promise<[Contato]>{
+    findAll(): Promise<[Contato]>{
         return this.http.get(this.contatosUrl)
                .toPromise()
                .then(response => response.json().data as [Contato])
@@ -55,8 +55,8 @@ export class ContatoService{
     }
 
 
-    getContato(id: number): Promise<Contato>{
-        return this.getContatos()
+    find(id: number): Promise<Contato>{
+        return this.findAll()
               .then((contatos: [Contato]) => contatos.find(contato => contato.id === id));
     }
 
@@ -92,7 +92,7 @@ export class ContatoService{
         })
         .then(() => {
             console.log('terceiro then');
-            return this.getContatos();
+            return this.findAll();
         });
 }
 }

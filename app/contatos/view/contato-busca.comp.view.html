@@ -7,13 +7,12 @@
 			<h3>Busca: </h3>
 
 			<div class="form-group">
-			    <input type="search" class="form-control" placeholder="Digite sua busca"
-			    #searchBox 
-			    (keyup)="buscar(searchBox.value)">
+			    <input type="search" class="form-control" placeholder="Digite sua pesquisa"
+			    [ngModel] ="busca" (ngModelChange)="buscar($event)">
 		  	</div>
 		
 			<ul class="list-group">
-			  <li class="list-group-item" *ngFor="let c of contatos | async">{{c.nome}}</li>
+			  <li class="list-group-item" *ngFor="let c of contatos | async" (click)="verDetalhe(c)">{{c.nome}}</li>
 			</ul>
 		</div>
 

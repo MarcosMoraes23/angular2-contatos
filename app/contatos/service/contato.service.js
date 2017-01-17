@@ -40,15 +40,15 @@ var ContatoService = (function () {
             .then(function () { return contato; })
             .catch(this.handleError);
     };
-    ContatoService.prototype.getContatos = function () {
+    ContatoService.prototype.findAll = function () {
         return this.http.get(this.contatosUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
         //return Promise.resolve(CONTATOS);
     };
-    ContatoService.prototype.getContato = function (id) {
-        return this.getContatos()
+    ContatoService.prototype.find = function (id) {
+        return this.findAll()
             .then(function (contatos) { return contatos.find(function (contato) { return contato.id === id; }); });
     };
     ContatoService.prototype.buscar = function (parametro) {
@@ -80,7 +80,7 @@ var ContatoService = (function () {
         })
             .then(function () {
             console.log('terceiro then');
-            return _this.getContatos();
+            return _this.findAll();
         });
     };
     return ContatoService;
