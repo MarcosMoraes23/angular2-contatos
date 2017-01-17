@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row" style="margin-top: 50px; margin-bottom: 10px">
+		<h2>Salvar Contato</h2>
+	</div>
+
+	<form (ngSubmit)="onSubmit()" #contatoForm="ngForm" novalidate>
+		
+		<div class="form-group" [ngClass]="getFormGroupClass(nome.valid, nome.pristine)">
+			<label for="nome" class="form-control-label">Nome</label>
+			<input type="text" required name="nome" class="form-control form-control-danger" [(ngModel)]="contato.nome" #nome="ngModel" [ngClass]="getFormControlClass(nome.valid, nome.pristine)">
+			<div class="form-control-feedback" [hidden]="nome.valid || nome.pristine">O Campo nome é obrigatório</div>
+		</div>
+
+		<div class="form-group" [ngClass]="getFormGroupClass(email.valid, email.pristine)">
+			<label for="email" class="form-control-label">Email</label>
+			<input type="email" required name="email" class="form-control form-control-danger" [(ngModel)]="contato.email" #email="ngModel" [ngClass]="getFormControlClass(email.valid, email.pristine)">
+			<div class="form-control-feedback" [hidden]="email.valid || email.pristine">O Campo email é obrigatório</div>
+		</div>
+
+		<div class="form-group" [ngClass]="getFormGroupClass(telefone.valid, telefone.pristine)">
+			<label for="telefone" class="form-control-label">Telefone</label>
+			<input type="text" required name="telefone" class="form-control form-control-danger" [(ngModel)]="contato.telefone" #telefone="ngModel" [ngClass]="getFormControlClass(telefone.valid, telefone.pristine)">
+			<div class="form-control-feedback" [hidden]="telefone.valid || telefone.pristine">O Campo telefone é obrigatório</div>
+		</div>
+
+		<button class="btn btn-success" type="submit" [disabled]="!contatoForm.form.valid">Salvar</button>
+		<a class="btn btn-secondary" (click) = "goBack()">Voltar</a>
+
+	</form>
+</div>
